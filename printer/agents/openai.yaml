@@ -1,0 +1,4 @@
+interface:
+  display_name: "Universal Printer"
+  short_description: "Find printers, print files, and track or cancel print jobs"
+  default_prompt: "Use $printer to find an available printer and print the file I specify."
