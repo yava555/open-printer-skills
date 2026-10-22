@@ -13,7 +13,37 @@ The agent must be able to execute scripts on the local network. A cloud-only age
 
 ## Installation and usage
 
-Requires Python 3.10+. Create an isolated environment in the project root:
+### Option 1: Ask your agent to install
+
+Copy and paste this request into a local agent that supports `SKILL.md`:
+
+```text
+Please install the printer skill from https://github.com/yava555/open-printer-skills.
+It discovers and remembers printers, prints PDF/JPEG files, and checks or cancels print jobs.
+Read README.md and printer/SKILL.md, install the entire printer folder in your skill search directory,
+and set up an isolated Python 3.10+ environment with its requirements.txt dependencies.
+Verify the setup without submitting a print job.
+```
+
+### Option 2: Install with npx skills add
+
+Requires [Node.js 22.20 or later and the skills CLI](https://github.com/vercel-labs/skills#install-a-skill). Run this from the project where you want to use the skill, then follow the prompts to choose your agent:
+
+```bash
+npx skills add yava555/open-printer-skills --skill printer
+```
+
+To make the skill available across projects, install it in your user directory with `-g`:
+
+```bash
+npx skills add yava555/open-printer-skills --skill printer -g
+```
+
+The CLI installs the skill files. Then ask your agent to follow [Prepare the runtime](printer/SKILL.md#prepare-the-runtime), using the installed skill's `requirements.txt` to set up its Python environment.
+
+### Manual runtime setup and usage
+
+Requires Python 3.10+. For a cloned checkout, create an isolated environment in the project root:
 
 ```bash
 python3 -m venv .venv
@@ -29,7 +59,7 @@ py -3 -m venv .venv
 .venv\Scripts\python.exe printer\scripts\printer.py discover
 ```
 
-Provide the entire `printer` folder to an agent that supports SKILL.md, or copy/link it into the agent's skill search directory and specify the virtual environment interpreter's path. The skill's files are self-contained; the virtual environment and user data are stored separately. This project does not automatically perform a global installation.
+For manual installation, provide the entire `printer` folder to an agent that supports SKILL.md, or copy/link it into the agent's skill search directory and specify the virtual environment interpreter's path. The skill's files are self-contained; the virtual environment and user data are stored separately.
 
 Example requests: "Find my printer," "Print two copies of this PDF," "Use the study printer by default from now on," or "Check the status of the last job."
 
